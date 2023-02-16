@@ -1,20 +1,17 @@
 import { GetServerSideProps } from 'next';
 
 interface Props {
-  mockData: string;
+  serverTime: number;
 }
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const { req, res } = context;
-  console.log(req, res);
-  return { props: { mockData: 'mock data' } };
+  return { props: { serverTime: Date.now() } };
 };
-  
 
-export default function Home({ mockData }:Props) {
+export default function Home({ serverTime }:Props) {
   return (
     <main>
       <h1>Firebase Next SSR Auth</h1>
-      <p>Server side data: { mockData }</p>
+      <p>Server time: { serverTime }</p>
     </main>
   )
 }
