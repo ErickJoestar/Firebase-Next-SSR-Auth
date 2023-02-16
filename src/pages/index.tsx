@@ -17,14 +17,13 @@ export default function Home({ serverTime }:Props) {
     <main>
       <h1>Firebase Next SSR Auth</h1>
       <p>Server time: { serverTime }</p>
-      { auth === undefined/*loading*/ ? <p>Loading...</p> : null }
-      { auth === null/*not logged in*/ ? <button onClick={signInWithGoogleRedirect}>Login</button> : null }
-      { auth ? (
+      { auth === undefined/*loading*/ ? <p>Loading...</p> : 
+        auth.user === null/*not logged in*/ ? <button onClick={signInWithGoogleRedirect}>Login</button> :
         <div>
           <pre>Auth state: {JSON.stringify(auth, null, 2)}</pre>
           <button onClick={logout}>Logout</button>
         </div>
-      ) : null }
+      }
     </main>
   )
 }
