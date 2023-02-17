@@ -5,18 +5,21 @@ import { logout, signInWithGoogleRedirect } from '@/util/firebase';
 
 interface Props {
   serverTime: number;
+  locals: string;
 }
 export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }) => {
-  return { props: { serverTime: Date.now() } };
+  const locals = JSON.stringify((res as any).locals);
+  return { props: { serverTime: Date.now(), locals } };
 };
 
-export default function Home({ serverTime }:Props) {
+export default function Home({ serverTime, locals }:Props) {
   const auth = useAuth();
 
   return (
     <main>
       <h1>Firebase Next SSR Auth</h1>
       <p>Server time: { serverTime }</p>
+      <p>locals: {locals}</p>
       { auth === undefined/*loading*/ ? <p>Loading...</p> : 
         auth.user === null/*not logged in*/ ? <button onClick={signInWithGoogleRedirect}>Login</button> :
         <div>

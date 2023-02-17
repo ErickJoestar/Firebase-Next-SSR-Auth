@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "firebase emulators:start",
-    "deploy": "firebase deploy",
+    "deploy": "FIREBASE_CLI_EXPERIMENTS=webframeworks firebase deploy",
     "lint": "next lint"
   },
   "devDependencies": {
