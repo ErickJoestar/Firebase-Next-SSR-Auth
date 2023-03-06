@@ -8,7 +8,7 @@ interface Props {
   locals: string;
 }
 export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }) => {
-  const locals = JSON.stringify((res as any).locals);
+  const locals = JSON.stringify((res as any).locals ?? {});
   return { props: { serverTime: Date.now(), locals } };
 };
 
